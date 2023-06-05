@@ -105,7 +105,6 @@ export function home(navigateTo) {
       const titlePublicacion = document.createElement('h2');
       titlePublicacion.setAttribute('class', 'titlePublicacion');
       titlePublicacion.innerHTML = publicacion.data().title;
-      // console.log(`post fuera de todo${JSON.stringify(publicacion)}`);
 
       const descriptionPublicacion = document.createElement('p');
       descriptionPublicacion.setAttribute('class', 'descriptionPublicacion');
@@ -119,11 +118,11 @@ export function home(navigateTo) {
 
       const buttonLike = document.createElement('button');
       buttonLike.setAttribute('class', 'buttonLike');
-      buttonLike.setAttribute('id', 'buttonLikeid1');
+      buttonLike.setAttribute('id', `${publicacion.data().id}`);
 
       buttonLike.innerHTML = '<img class="imgChef" src="./imagenes/chef.png" >';
 
-      let isLiked = localStorage.getItem('isLiked') === 'true';
+      let isLiked = localStorage.getItem(`isLiked_${publicacion.id}`) === 'true';
 
       buttonLike.addEventListener('click', () => {
         if (isLiked) {
@@ -134,9 +133,8 @@ export function home(navigateTo) {
           isLiked = true;
         }
 
-        localStorage.setItem('isLiked', isLiked.toString());
+        localStorage.setItem(`isLiked_${publicacion.id}`, isLiked.toString());
       });
-
 
       containerLike.appendChild(buttonLike);
       containerLike.appendChild(contador);
